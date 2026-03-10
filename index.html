@@ -148,7 +148,7 @@ body.dark-mode .difficulty-hard{background:rgba(199,199,195,.4);color:#c7c7c3;}
 <div class="quest-list" id="questList"></div>
 
 <div class="button-container">
-<button class="theme-toggle" onclick="toggleTheme()">
+<button class="theme-toggle" onclick="playClick();toggleTheme()">
 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <circle cx="12" cy="12" r="5"></circle>
 <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -161,13 +161,17 @@ body.dark-mode .difficulty-hard{background:rgba(199,199,195,.4);color:#c7c7c3;}
 <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
 </svg>
 </button>
-<button onclick="shuffleQuests()">shuffle</button>
+<button onclick="playClick();shuffleQuests()">shuffle</button>
 </div>
 
 </div>
 
 <script>
-
+function playClick(){
+const audio = new Audio('click.mp3');
+audio.volume = 0.3;
+audio.play().catch(e => console.log('Audio play failed:', e));
+}
 const STORAGE="sidequest_save";
 
 const allQuests = {
@@ -583,7 +587,8 @@ list.appendChild(item);
 }
 
 function toggle(i){
-
+  
+playClick();
 states[i]=!states[i];
 
 save();
